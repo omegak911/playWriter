@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -w",
-    "start": "nodemon ./server/entry.js"
+    "build:watch": "webpack -w",
+    "build:server": "webpack-dev-server --hot --inline",
+    "start": "nodemon server/entry.js --ignore './client/'"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,9 @@
     "react-dom": "^16.5.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "styled-components": "^3.4.10"
+    "styled-components": "^3.4.10",
+    "webpack": "^4.20.2",
+    "webpack-dev-server": "^3.1.9"
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
@@ -36,7 +39,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "css-loader": "^1.0.0",
-    "style-loader": "^0.23.1"
+    "style-loader": "^0.23.1",
+    "webpack-cli": "^3.1.2"
   },
   "babel": {
     "presets": [

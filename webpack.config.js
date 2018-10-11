@@ -28,5 +28,15 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx']
-  }
+  },
+  devServer: {
+    port: 3001, // Defaults to 8080
+    contentBase: path.resolve(__dirname, './client/dist'),
+    watchContentBase: true,
+    proxy: {
+      context: () => true,
+      '/': 'http://localhost:3000',
+      secure: false
+    }
+  },
 };
