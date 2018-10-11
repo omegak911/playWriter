@@ -30,8 +30,4 @@ const Tabs = ({ createOptions, displayCreate, handleSelection, selectOptions }) 
     </div>
   </div>
 
-const StyledSelectOption = styled.h2`
-  
-`
-
 export default Tabs;
