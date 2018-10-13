@@ -21,7 +21,7 @@ class Edit extends Component {
   
         },
       },
-      script: [],
+      currentScript: [],
       options: [],
       showCreateBox: false,
       createType: '',
@@ -72,33 +72,25 @@ class Edit extends Component {
 
   createSpeech = (e) => {
     e.preventDefault();
-    let { requiredSelections, script, text } = this.state;
+    let { requiredSelections, currentScript, text } = this.state;
     let { character, act, scene } = requiredSelections;
 
-    const logger = () => console.log(this.state.script);  //delete this
+    const logger = () => console.log(this.state.currentScript);  //delete this
 
-    if (character) {
-      if (act && scene && text) {
-        this.setState({ script: [...script, { act, scene, character, text }] }, logger);
-      } else {
-        alert('hey you need act, scene, and text')
-      }
-    } else if (scene) {
-      if (act && text) {
-        this.setState({ script: [...script, { act, scene, text }]}, logger);
-      } else {
-        alert('hey you need act and text')
-      }
+    let scriptCopy = {...currentScript};
+
+    if (act && scene && text) {
+      scriptCopy[act] = scriptCopy[act] || {};
+      scriptCopy[act][scene] = scriptCopy[act][scene] || [];
+      scriptCopy[act][scene].push({ act, scene, text, character });
+      this.setState({ currentScript: scriptCopy }, logger);
     } else {
-      alert('pick something')
+      alert('missing information')
     }
   }
 
   savePlay = () => {
-    console.log('this should take in this.state.script and writefile');
-    //doesn't really matter if we rewrite the whole file each time
-    //it's more expensive figuring out specifically which part of the document to update
-    axios.post('/api', this.state.script)
+    axios.post('/api', this.state.currentScript)
       .then(() => console.log('hey'))
       .catch((err) => console.error(`error: ${err}`));
   }
