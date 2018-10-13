@@ -7,37 +7,23 @@ const writeFileSync = promisify(fs.writeFile);
 const readdirSync = promisify(fs.readdir);
 const readFileSync = promisify(fs.readFile);
 
-const writeFileCtrl = async (scripts) => { //array of { act: #, scene: #, text: string }
+const writeFileCtrl = async (scripts) => { //scripts = { I: { I: []}, II: { I: []}};
+  let order = ['I','II','III','IV','V','VI','VII','VIII','IX','X'];
+  let numberOfActs = Object.keys(scripts).length;
 
-  let order = {
-    I: 1,
-    II: 2,
-    III: 3,
-    IV: 4,
-    V: 5,
-    VI: 6,
-    VII: 7,
-    VIII: 8,
-    IX: 9,
-    X: 10
-  };
-
-  scripts.sort((a,b) => order[a.act] - order[b.act]);
-  let scenes = '';
-  let currentAct = scripts[0].act;
-  for (let i = 0; i < scripts.length; i++) {
-    let script = scripts[i];
-    if (currentAct !== script.act || i === scripts.length - 1) {
-      if (i === scripts.length - 1) {
-        scenes += (JSON.stringify(script) + '\n');
+  for (let i = 0; i < numberOfActs; i++) { //
+    let act = order[i];
+    let numberOfScenes = Object.keys(scripts[act]).length;
+    for (let k = 0; k < numberOfScenes; k++) {
+      let scene = order[k];
+      let sceneEntries = scripts[act][scene]; //this is the scene array
+      
+      let temp = '';
+      for (let j = 0; j < sceneEntries.length; j++) {
+        temp += (JSON.stringify(sceneEntries[j]) + '\n');
       }
-      await writeFileSync(`${pathname}/${currentAct}.txt`, scenes)
-      // .then(() => console.log('1'))
-      // .catch((err) => console.error(err));
-      currentAct = script.act;
-      scenes = '';
+      await writeFileSync(`${pathname}/${act}.txt`, temp);
     }
-    scenes += (JSON.stringify(script) + '\n');
   }
 }
 
