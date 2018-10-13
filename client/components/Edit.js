@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import styled from 'styled-components';
+
 import Tabs from './Tabs';
+import Display from './Display';
 
 class Edit extends Component {
   constructor(props) {
@@ -27,8 +30,13 @@ class Edit extends Component {
         character: false,
         act: false,
         scene: false,
-      }
+      },
+      update: true,
     }
+  }
+
+  updateSelectOptions = (selectOptions) => {
+    this.setState({ selectOptions, update: false });
   }
 
   handleChange = (e) => {
@@ -90,13 +98,15 @@ class Edit extends Component {
     console.log('this should take in this.state.script and writefile');
     //doesn't really matter if we rewrite the whole file each time
     //it's more expensive figuring out specifically which part of the document to update
-
-
+    axios.post('/api', this.state.script)
+      .then(() => console.log('hey'))
+      .catch((err) => console.error(`error: ${err}`));
   }
 
   render() {
-    let { createOptions, createType, showCreateBox, selectOptions } = this.state;
+    let { createOptions, createType, showCreateBox, selectOptions, update } = this.state;
     let { characters, acts, scenes } = selectOptions;
+    let { scripts } = this.props;
     return (
       <div>
         Welcome to Edit
@@ -124,6 +134,7 @@ class Edit extends Component {
             <button type="submit">submit</button>
           </form>
         </div>
+        <Display scripts={scripts} updateSelectOptions={this.updateSelectOptions} update={update}/>
       </div>
     )
   }
