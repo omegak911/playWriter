@@ -35,6 +35,10 @@ class Edit extends Component {
     }
   }
 
+  componentWillMount() {
+    this.setState({ currentScript: this.props.scripts }, () => console.log(this.state.currentScript));
+  }
+
   updateSelectOptions = (selectOptions) => {
     this.setState({ selectOptions, update: false });
   }
