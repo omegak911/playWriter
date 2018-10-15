@@ -26,20 +26,22 @@ const Display = ({ scripts, updateSelectOptions, update }) => {
       sceneKeys = Object.keys(scripts[act]);
       return (
         <div key={i}>
-          <h3>Act {act}</h3>
+          <h3>ACT {act}</h3>
           {sceneKeys.map((scene, j) => {
             selectOptions.scenes[scene] = true;
             scriptKeys = scripts[act][scene];
             return <div key={j}>
-              <h4>Scene {scene}</h4>
+              <h3>SCENE {scene}</h3>
               {scriptKeys.map((script, k) => {
-                //need character
-                //condition at end of iteration
+                if (script.character) {
+                  selectOptions.characters[script.character] = true;
+                }
                 atLastItem(i,j,k);
                 return (
-                  <StyledSpeech key={k}>
-                    {script}
-                  </StyledSpeech>
+                  <div key={k}>
+                    {script.character ? <b>{script.character}</b> : ''}
+                    <StyledSpeech>{script.text}</StyledSpeech>
+                  </div>
                 )
               })}
             </div>
