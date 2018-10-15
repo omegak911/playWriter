@@ -17,7 +17,6 @@ const writeFileCtrl = async (scripts) => { //scripts = { I: { I: []}, II: { I: [
     for (let k = 0; k < numberOfScenes; k++) {
       let scene = order[k];
       let sceneEntries = scripts[act][scene]; //this is the scene array
-      
       let temp = '';
       for (let j = 0; j < sceneEntries.length; j++) {
         temp += (JSON.stringify(sceneEntries[j]) + '\n');
@@ -38,11 +37,12 @@ const readFileCtrl = async () => {
             script.pop();
             for (let k = 0; k < script.length; k++) {
               let parsedScene = JSON.parse(script[k]);
-              let act = parsedScene.act;
-              let scene = parsedScene.scene;
+              let { act, scene, text, character } = parsedScene;
+              // let act = parsedScene.act;
+              // let scene = parsedScene.scene;
               scripts[act] = scripts[act] || {};
               scripts[act][scene] = scripts[act][scene] || [];
-              scripts[act][scene].push(parsedScene.text);
+              scripts[act][scene].push({ text, character });
             }
           })
           .catch((err) => console.error(err));
