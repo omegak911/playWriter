@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:watch": "webpack -w",
     "build:server": "webpack-dev-server --hot --inline",
-    "start": "nodemon server/entry.js --ignore './client/'"
+    "start": "nodemon server/entry.js --ignore 'client/'"
   },
   "repository": {
     "type": "git",
