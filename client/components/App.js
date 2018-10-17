@@ -35,7 +35,7 @@ class App extends Component {
               <Nav />
               <Switch>
                 <Route exact path="/"
-                  render={() => <View />}
+                  render={() => <View scripts={this.state.scripts}/>}
                   // component={View}
                   />
                 <Route path="/edit" 
