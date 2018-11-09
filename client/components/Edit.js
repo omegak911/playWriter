@@ -86,7 +86,7 @@ class Edit extends Component {
     if (act && scene && text) {
       scriptCopy[act] = scriptCopy[act] || {};
       scriptCopy[act][scene] = scriptCopy[act][scene] || [];
-      scriptCopy[act][scene].push({ act, scene, text, character });
+      scriptCopy[act][scene].push({ scene, text, character });
       this.setState({ currentScript: scriptCopy }, logger);
     } else {
       alert('missing information')

@@ -37,7 +37,8 @@ const readFileCtrl = async () => {
             script.pop();
             for (let k = 0; k < script.length; k++) {
               let parsedScene = JSON.parse(script[k]);
-              let { act, scene, text, character } = parsedScene;
+              let { scene, text, character } = parsedScene;
+              let act = fileNames[i].split('.')[0];
               scripts[act] = scripts[act] || {};
               scripts[act][scene] = scripts[act][scene] || [];
               scripts[act][scene].push({ text, character });
