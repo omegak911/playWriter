@@ -59,9 +59,26 @@ const readFileCtrl = async () => {
   return scripts;
 }
 
+const readDraftCtrl = async () => {
+  let draft = '';
+  await readFileSync(draftPath)
+    .then((content) => {
+      draft = content;
+    })
+    .catch(err => console.error(err));
+  return draft;
+}
+
+const writeDraftCtrl = (draft) => {
+  writeFileSync(draftPath, draft)
+}
+
 const pathname = path.join(__dirname, '../script');
+const draftPath = path.join(__dirname, '../draft/draft.txt');
 
 export default {
   readFileCtrl,
-  writeFileCtrl
+  writeFileCtrl,
+  readDraftCtrl,
+  writeDraftCtrl
 }
