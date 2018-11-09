@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('/api')
+    axios.get('/api/script')
       .then(({ data: scripts }) => {
         this.setState({ scripts });
       })

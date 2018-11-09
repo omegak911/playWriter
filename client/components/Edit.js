@@ -95,7 +95,7 @@ class Edit extends Component {
   }
 
   savePlay = () => {
-    axios.post('/api', this.state.currentScript)
+    axios.post('/api/edit', this.state.currentScript)
       .then(() => console.log('hey'))
       .catch((err) => console.error(`error: ${err}`));
   }
