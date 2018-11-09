@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: ['babel-polyfill', path.join(__dirname, './client/index.js')],
+  entry: ['@babel/polyfill', path.join(__dirname, './client/index.js')],
   output: {
     path: path.resolve(__dirname, './client/dist'),
     filename: 'bundle.js'
@@ -12,9 +12,12 @@ module.exports = {
       {
         test: /\.js[x]?/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['react', 'env', 'stage-0']
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env'],
+            plugins: ["@babel/plugin-proposal-class-properties"]
+          }
         }
       },
       {
