@@ -58,7 +58,8 @@ class Edit extends Component {
     this.setState({ requiredSelections }, () => console.log(this.state.requiredSelections));
   }
 
-  handleCreate = () => {
+  handleCreate = (e) => {
+    e.preventDefault()
     let { createType, text, selectOptions } = this.state;
 
     if (selectOptions[createType][text]) {
@@ -109,8 +110,10 @@ class Edit extends Component {
         {showCreateBox ?
           <div> 
             Creating new {createType}
-            <input type="text" onChange={this.handleChange}/>
-            <button type="button" onClick={this.handleCreate}>submit</button>
+            <form action="" onSubmit={this.handleCreate}>
+              <input type="text" onChange={this.handleChange}/>
+              <button type="button" onClick={this.handleCreate}>submit</button>
+            </form>
           </div>
           :
           <div>
@@ -126,8 +129,8 @@ class Edit extends Component {
         <div>
           Write your art here:
           <form action="" onSubmit={this.createSpeech}>
-            <textarea type="text" name="art" onChange={this.handleText}/>
-            <button type="submit">submit</button>
+            <input type="text" name="art" onChange={this.handleText}/>
+            <button type="button">submit</button>
           </form>
         </div>
         <Display scripts={scripts} updateSelectOptions={this.updateSelectOptions} update={update}/>
