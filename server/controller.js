@@ -23,7 +23,13 @@ const writeFileCtrl = async (scripts) => { //scripts = { I: { I: []}, II: { I: [
         entry.scene = scene;
         temp += (JSON.stringify(entry) + '\n');
       }
-      await writeFileSync(`${pathname}/${act}.txt`, temp);
+      if (k === 0) {
+        console.log('0')
+        await writeFileSync(`${pathname}/${act}.txt`, temp);
+      } else {
+        console.log('not 0')
+        fs.appendFileSync(`${pathname}/${act}.txt`, temp);
+      }
     }
   }
 }
