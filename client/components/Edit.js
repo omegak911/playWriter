@@ -88,7 +88,7 @@ class Edit extends Component {
       scriptCopy[act] = scriptCopy[act] || {};
       scriptCopy[act][scene] = scriptCopy[act][scene] || [];
       scriptCopy[act][scene].push({ scene, text, character });
-      this.setState({ currentScript: scriptCopy }, logger);
+      this.setState({ currentScript: scriptCopy, text: '' }, logger);
     } else {
       alert('missing information')
     }
@@ -101,7 +101,7 @@ class Edit extends Component {
   }
 
   render() {
-    let { createOptions, createType, showCreateBox, selectOptions, update } = this.state;
+    let { createOptions, createType, showCreateBox, selectOptions, update, text } = this.state;
     let { characters, acts, scenes } = selectOptions;
     let { scripts } = this.props;
     return (
@@ -129,8 +129,8 @@ class Edit extends Component {
         <div>
           Write your art here:
           <form action="" onSubmit={this.createSpeech}>
-            <input type="text" name="art" onChange={this.handleText}/>
-            <button type="button">submit</button>
+            <input type="text" value={text} name="art" onChange={this.handleText}/>
+            <button type="submit">submit</button>
           </form>
         </div>
         <Display scripts={scripts} updateSelectOptions={this.updateSelectOptions} update={update}/>

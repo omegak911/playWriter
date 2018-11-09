@@ -21,12 +21,11 @@ const Display = ({ scripts, updateSelectOptions, update }) => {
 
   return (<div>
     {actKeys.map((act, i) => {
-      //need act
       selectOptions.acts[act] = true;
       sceneKeys = Object.keys(scripts[act]);
       return (
         <div key={i}>
-          <h3>ACT {act}</h3>
+          <h2>ACT {act}</h2>
           {sceneKeys.map((scene, j) => {
             selectOptions.scenes[scene] = true;
             scriptKeys = scripts[act][scene];
