@@ -19,7 +19,9 @@ const writeFileCtrl = async (scripts) => { //scripts = { I: { I: []}, II: { I: [
       let sceneEntries = scripts[act][scene]; //this is the scene array
       let temp = '';
       for (let j = 0; j < sceneEntries.length; j++) {
-        temp += (JSON.stringify(sceneEntries[j]) + '\n');
+        let entry = sceneEntries[j];
+        entry.scene = scene;
+        temp += (JSON.stringify(entry) + '\n');
       }
       await writeFileSync(`${pathname}/${act}.txt`, temp);
     }
